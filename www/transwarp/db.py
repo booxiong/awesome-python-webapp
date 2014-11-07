@@ -5,7 +5,7 @@ import time,uuid,functools,threading,logging
 
 class Dict(dict):
 	def __init__(self, names=(),values=(),**kw):
-		super(Dict, self).__init__**kw()
+		super(Dict, self).__init__(**kw)
 		for k,v in zip(names,values):
 			self[k] = v
 
@@ -231,7 +231,7 @@ def select(sql,*args):
 def _update(sql,*args):
 	global _db_ctx
 	cursor = None
-	sql = sql.replace('?','%')
+	sql = sql.replace('?','%s')
 	logging.info('SQL: %s, ARGS: %s' % (sql, args))
 	try:
 		cursor = _db_ctx.connection.cursor()
