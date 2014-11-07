@@ -5,13 +5,13 @@ import time,logging
 import db
 
 class Field(object):
-	count = 0
+	_count = 0
 
 	def __init__(self,**kw):
 		self.name = kw.get('name',None)
 		self._default = kw.get('default',None)
 		self.primary_key = kw.get('primary_key',False)
-		self.nullable = kw/get('nullable',False)
+		self.nullable = kw.get('nullable',False)
 		self.updatable = kw.get('updateable',True)
 		self.insertable = kw.get('insertable',True)
 		self.ddl = kw.get('ddl','')
@@ -141,8 +141,8 @@ class ModelMetaclass(type):
 		if not '__table__' in attrs:
 			attrs['__table__'] = name.lower()
 
-		attrs['__mapping__'] = mapping
-		attrs['__primary_key__'] = __primary_key__
+		attrs['__mappings__'] = mappings
+		attrs['__primary_key__'] = primary_key
 		attrs['__sql__'] = lambda self: _gen_sql(attrs['__table__'], mappings)
 		for trigger in _triggers:
 			if not trigger in attrs:
