@@ -204,7 +204,7 @@ def _select(sql,first,*args):
 
 			return Dict(names,values)
 
-		return [Dict[names,x] for x in cursor.fetchall()]
+		return [Dict(names,x) for x in cursor.fetchall()]
 	finally:
 		if cursor:
 			cursor.close()
